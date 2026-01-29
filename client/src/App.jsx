@@ -1,35 +1,62 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from 'react';
+import useNoteStore from './store/useNoteStore';
+import useThemeStore from './store/useThemeStore';
+import useAuthStore from './store/useAuthStore';
+import Sidebar from './components/Sidebar';
+import Editor from './components/Editor';
+import Settings from './components/Settings';
+import Auth from './components/Auth';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const fetchNotes = useNoteStore((s) => s.fetchNotes);
+  const initTheme = useThemeStore((s) => s.init);
+  const token = useAuthStore((s) => s.token);
+  const isOfflineMode = useAuthStore((s) => s.isOfflineMode);
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+  const [currentView, setCurrentView] = useState('editor'); 
+  const [settingsSection, setSettingsSection] = useState('Sync & Cloud');
+
+  useEffect(() => {
+    initTheme();
+  }, [initTheme]);
+
+  useEffect(() => {
+    if (token) {
+      fetchNotes();
+    }
+  }, [fetchNotes, token]);
+
+  if (!token && !isOfflineMode) {
+    return <Auth />;
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="flex h-screen overflow-hidden bg-slate-50 dark:bg-[#0f172a] text-slate-900 dark:text-slate-100 transition-theme">
+      {currentView === 'editor' ? (
+        <>
+          <Sidebar
+            mobileOpen={mobileSidebarOpen}
+            onCloseMobile={() => setMobileSidebarOpen(false)}
+            onSettingsClick={() => {
+              setSettingsSection('Profile');
+              setCurrentView('settings');
+            }}
+          />
+          <main className="flex-1 flex flex-col min-w-0 overflow-hidden">
+            <Editor
+              onOpenSidebar={() => setMobileSidebarOpen(true)}
+              onSettingsClick={() => {
+                setSettingsSection('Sync & Cloud');
+                setCurrentView('settings');
+              }}
+            />
+          </main>
+        </>
+      ) : (
+        <Settings onBack={() => setCurrentView('editor')} initialSection={settingsSection} />
+      )}
+    </div>
+  );
 }
 
-export default App
+export default App;

@@ -8,7 +8,7 @@ const noteController = require('./controllers/noteController');
 const aiController = require('./controllers/aiController');
 const auth = require('./middleware/auth');
 
-const app = express();
+const app = express()
 const PORT = process.env.PORT || 3000;
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/notely';
 
@@ -27,6 +27,8 @@ app.post('/api/ai/generate-title', auth, aiController.generateTitle);
 app.post('/api/ai/suggest-tags', auth, aiController.suggestTags);
 
 app.get('/health', (req, res) => res.json({ status: 'ok' }));
+
+console.log("Loaded Mongo URI:", process.env.MONGODB_URI);
 
 mongoose.connect(MONGODB_URI)
     .then(() => {

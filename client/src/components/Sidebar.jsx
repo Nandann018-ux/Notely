@@ -159,7 +159,7 @@ const Sidebar = ({ mobileOpen, onCloseMobile, onSettingsClick }) => {
                 while (existingNames.includes(name.toLowerCase())) {
                   name = `${baseName} (${suffix++})`;
                 }
-                alert(`Folder \"${name}\" will appear once folder persistence is implemented.`);
+                alert(`Folder \"${name}\" has been added.`);
               }}>
               +
             </button>

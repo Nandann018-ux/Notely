@@ -160,8 +160,7 @@ const Sidebar = ({ mobileOpen, onCloseMobile, onSettingsClick }) => {
                   name = `${baseName} (${suffix++})`;
                 }
                 alert(`Folder \"${name}\" will appear once folder persistence is implemented.`);
-              }}
-            >
+              }}>
               +
             </button>
           </div>

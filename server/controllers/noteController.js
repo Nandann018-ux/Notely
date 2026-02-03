@@ -13,7 +13,7 @@ exports.syncNotes = async (req, res) => {
             updateOne: {
                 filter: {
                     id: note.id,
-                    userId: userId 
+                    userId: userId
                 },
                 update: {
                     $set: {
@@ -23,7 +23,8 @@ exports.syncNotes = async (req, res) => {
                         lastModified: note.lastModified,
                         isDeleted: note.isDeleted,
                         userId: userId,
-                        id: note.id
+                        id: note.id,
+                        folderId: note.folderId || null
                     }
                 },
                 upsert: true
@@ -40,6 +41,7 @@ exports.syncNotes = async (req, res) => {
                             content: { $cond: [{ $gt: [note.lastModified, { $ifNull: ["$lastModified", 0] }] }, note.content, "$content"] },
                             tags: { $cond: [{ $gt: [note.lastModified, { $ifNull: ["$lastModified", 0] }] }, note.tags, "$tags"] },
                             isDeleted: { $cond: [{ $gt: [note.lastModified, { $ifNull: ["$lastModified", 0] }] }, note.isDeleted, "$isDeleted"] },
+                            folderId: { $cond: [{ $gt: [note.lastModified, { $ifNull: ["$lastModified", 0] }] }, note.folderId || null, "$folderId"] },
                             lastModified: { $max: [note.lastModified, { $ifNull: ["$lastModified", 0] }] },
                             userId: userId,
                             id: note.id

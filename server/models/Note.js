@@ -13,7 +13,13 @@ const NoteSchema = new mongoose.Schema({
     ref: 'User',
     required: true
   },
-  
+
+  folderId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Folder',
+    default: null
+  },
+
   title: { type: String, default: '' },
   content: { type: String, default: '' },
   tags: [{ type: String }],

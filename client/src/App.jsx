@@ -13,7 +13,7 @@ function App() {
   const token = useAuthStore((s) => s.token);
   const isOfflineMode = useAuthStore((s) => s.isOfflineMode);
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
-  const [currentView, setCurrentView] = useState('editor'); 
+  const [currentView, setCurrentView] = useState('editor');
   const [settingsSection, setSettingsSection] = useState('Sync & Cloud');
 
   useEffect(() => {

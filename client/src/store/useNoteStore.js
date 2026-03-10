@@ -101,7 +101,7 @@ const useNoteStore = create((set, get) => ({
                 } else {
                     set({ syncStatus: 'error' });
                 }
-            }, 3000); 
+            }, 3000);
         };
     })(),
 }));

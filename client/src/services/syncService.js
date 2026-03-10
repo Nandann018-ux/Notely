@@ -30,10 +30,11 @@ export const syncWithServer = async () => {
     if (response.status === 200) {
       const { notes: updatedNotes } = response.data;
       for (const note of updatedNotes) {
-        const localNote = {...note,
+        const localNote = {
+          ...note,
           _id: note.id,
           id: note.id,
-          syncStatus:'synced',
+          syncStatus: 'synced',
         };
         await saveNote(localNote);
       }

@@ -7,10 +7,10 @@ import { Plus, FileText, Star, FolderOpen, Trash2, Share2, Cloud, CloudOff, Sett
 const FOLDERS = [{ id: 'default', label: 'Default' }];
 
 function SyncIcon({ status }) {
-  if (status === 'error'){
+  if (status === 'error') {
     return <CloudOff className="w-3.5 h-3.5 text-red-500 shrink-0" />;
   }
-  if (status === 'pending'){
+  if (status === 'pending') {
     return <Cloud className="w-3.5 h-3.5 text-amber-500 animate-pulse shrink-0" />;
   }
   return <Cloud className="w-3.5 h-3.5 text-emerald-500 shrink-0" />;
@@ -101,44 +101,40 @@ const Sidebar = ({ mobileOpen, onCloseMobile, onSettingsClick }) => {
         <nav className="p-2 flex-1 overflow-y-auto custom-scrollbar">
           <button
             onClick={() => setFilter('all')}
-            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left text-sm font-medium transition-colors ${
-              filter === 'all'
+            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left text-sm font-medium transition-colors ${filter === 'all'
                 ? 'bg-slate-900/5 dark:bg-white/5 text-slate-900 dark:text-white'
                 : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/80'
-            }`}
+              }`}
           >
             <FileText className="w-4 h-4 text-slate-500 dark:text-slate-400" />
             All Notes
           </button>
           <button
             onClick={() => setFilter('favorites')}
-            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left text-sm font-medium transition-colors ${
-              filter === 'favorites'
+            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left text-sm font-medium transition-colors ${filter === 'favorites'
                 ? 'bg-slate-900/5 dark:bg-white/5 text-slate-900 dark:text-white'
                 : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/80'
-            }`}
+              }`}
           >
             <Star className="w-4 h-4 text-slate-500 dark:text-slate-400" />
             Favorites
           </button>
           <button
             onClick={() => setFilter('shared')}
-            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left text-sm font-medium transition-colors ${
-              filter === 'shared'
+            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left text-sm font-medium transition-colors ${filter === 'shared'
                 ? 'bg-slate-900/5 dark:bg-white/5 text-slate-900 dark:text-white'
                 : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/80'
-            }`}
+              }`}
           >
             <Share2 className="w-4 h-4 text-slate-500 dark:text-slate-400" />
             Shared
           </button>
           <button
             onClick={() => setFilter('trash')}
-            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left text-sm font-medium transition-colors ${
-              filter === 'trash'
+            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left text-sm font-medium transition-colors ${filter === 'trash'
                 ? 'bg-slate-900/5 dark:bg-white/5 text-slate-900 dark:text-white'
                 : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/80'
-            }`}
+              }`}
           >
             <Trash2 className="w-4 h-4 text-slate-500 dark:text-slate-400" />
             Trash
@@ -168,11 +164,10 @@ const Sidebar = ({ mobileOpen, onCloseMobile, onSettingsClick }) => {
             <button
               key={f.id}
               className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left text-sm font-medium transition-colors
-              ${
-                f.id === 'default'
+              ${f.id === 'default'
                   ? 'bg-slate-900/5 dark:bg-white/5 text-slate-900 dark:text-white'
                   : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/80'
-              }`}
+                }`}
             >
               <FolderOpen className="w-4 h-4 shrink-0 text-slate-500 dark:text-slate-400" />
               {f.label}
